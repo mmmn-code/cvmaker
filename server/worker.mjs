@@ -15,14 +15,35 @@ export function validateResume(value){
  if(!cleaned.name&&!cleaned.role&&!cleaned.summary&&!cleaned.experience.length&&!cleaned.education.length&&!cleaned.skills)throw new Error('Empty resume');
  return cleaned;
 }
-async function readBoundedJson(request){
+async function readBoundedBody(request,limit=65536){
  const reader=request.body?.getReader();if(!reader)throw new Error('invalid');let bytes=0,chunks=[];
- try{while(true){const {value,done}=await reader.read();if(done)break;bytes+=value.byteLength;if(bytes>65536){await reader.cancel();throw new Error('large')}chunks.push(value)}}finally{reader.releaseLock()}
- const full=new Uint8Array(bytes);let position=0;for(const chunk of chunks){full.set(chunk,position);position+=chunk.length}return JSON.parse(new TextDecoder().decode(full));
+ try{while(true){const {value,done}=await reader.read();if(done)break;bytes+=value.byteLength;if(bytes>limit){await reader.cancel();throw new Error('large')}chunks.push(value)}}finally{reader.releaseLock()}
+ const full=new Uint8Array(bytes);let position=0;for(const chunk of chunks){full.set(chunk,position);position+=chunk.length}return full;
 }
-// Best-effort per-isolate burst protection. Site access remains owner-private at the hosting layer.
+async function readBoundedJson(request){return JSON.parse(new TextDecoder().decode(await readBoundedBody(request)))}
+
+// Return the browser-generated PDF as an HTTP attachment, including in browsers
+// that do not download blob URLs. Nothing is stored or sent to an external service.
+export async function handlePdfDownload(request){
+ if(request.method!=='POST')return response({error:'Create your PDF in Folio first.'},405);
+ if(request.headers.get('Origin')!==new URL(request.url).origin||request.headers.get('Sec-Fetch-Site')==='cross-site')return response({error:'Open Folio to download your PDF.'},403);
+ if(!request.headers.get('Content-Type')?.startsWith('application/x-www-form-urlencoded'))return response({error:'Invalid PDF download.'},415);
+ try{
+  const form=new URLSearchParams(new TextDecoder().decode(await readBoundedBody(request,2*1024*1024)));
+  const encoded=form.get('pdf')||'';
+  if(!/^[A-Za-z0-9+/]+={0,2}$/.test(encoded))return response({error:'Invalid PDF file.'},400);
+  const binary=atob(encoded);
+  if(!binary.startsWith('%PDF-')||!binary.slice(-32).includes('%%EOF'))return response({error:'Invalid PDF file.'},400);
+  const bytes=Uint8Array.from(binary,c=>c.charCodeAt(0));
+  const filename=(form.get('filename')||'resume.pdf').replace(/[\x00-\x1f\x7f<>:"/\\|?*]/g,'').slice(0,120);
+  const fallback=filename.replace(/[^a-zA-Z0-9._ -]/g,'_')||'resume.pdf';
+  const encodedName=encodeURIComponent(filename).replace(/[!'()*]/g,c=>'%'+c.charCodeAt(0).toString(16));
+  return new Response(bytes,{headers:{'Content-Type':'application/pdf','Content-Disposition':`attachment; filename="${fallback}"; filename*=UTF-8''${encodedName}`,'Content-Length':String(bytes.length),'Cache-Control':'no-store','X-Content-Type-Options':'nosniff'}});
+ }catch(error){return response({error:error.message==='large'?'This PDF is too large. Please shorten your resume.':'Could not prepare the PDF download.'},error.message==='large'?413:400)}
+}
+// Best-effort per-instance burst protection; Vercel supplies the client IP.
 const requestWindows=new Map();
-function allowRequest(request){const ip=request.headers.get('CF-Connecting-IP')||'local';const now=Date.now(),previous=requestWindows.get(ip);if(requestWindows.size>2048)for(const [key,row] of requestWindows)if(now-row.since>60000)requestWindows.delete(key);const row=previous&&now-previous.since<60000?previous:{since:now,count:0};row.count++;requestWindows.set(ip,row);return row.count<=6}
+function allowRequest(request,env){const ip=(env.VERCEL==='1'?request.headers.get('x-forwarded-for')?.split(',')[0]?.trim():request.headers.get('CF-Connecting-IP'))||'local';const now=Date.now(),previous=requestWindows.get(ip);if(requestWindows.size>2048)for(const [key,row] of requestWindows)if(now-row.since>60000)requestWindows.delete(key);const row=previous&&now-previous.since<60000?previous:{since:now,count:0};row.count++;requestWindows.set(ip,row);return row.count<=6}
 export async function handleExtraction(request,env,fetcher=fetch){
  if(request.method!=='POST')return response({error:'Use POST to extract resume details.'},405);
  const origin=request.headers.get('Origin');const validOrigins=new Set([new URL(request.url).origin,'https://folio-resume-studio.connect350599.chatgpt.site']);
@@ -31,7 +52,7 @@ export async function handleExtraction(request,env,fetcher=fetch){
  let body;try{body=await readBoundedJson(request)}catch(error){return response({error:error.message==='large'?'Keep your details under 16,000 characters.':'The request could not be read.'},error.message==='large'?413:400)}
  if(typeof body?.text!=='string'||body.text.trim().length<40||body.text.length>16000)return response({error:'Paste between 40 and 16,000 characters of resume details.'},400);
  if(!env.GEMINI_API_KEY)return response({error:'AI extraction is not configured yet. You can still fill in your resume manually.'},503);
- if(!allowRequest(request))return response({error:'Please wait a minute before trying another extraction.'},429);
+ if(!allowRequest(request,env))return response({error:'Please wait a minute before trying another extraction.'},429);
  const model=env.GEMINI_MODEL||'gemini-3.1-flash-lite';if(!/^gemini-[a-z0-9.-]+$/.test(model))return response({error:'The AI model configuration needs attention.'},503);
  let upstream;
  try{upstream=await fetcher(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`,{method:'POST',headers:{'Content-Type':'application/json','x-goog-api-key':env.GEMINI_API_KEY},body:JSON.stringify({systemInstruction:{parts:[{text:SYSTEM_PROMPT}]},contents:[{role:'user',parts:[{text:body.text}]}],generationConfig:{temperature:0.1,maxOutputTokens:8192,responseMimeType:'application/json',responseJsonSchema:resumeSchema}}),signal:AbortSignal.timeout(50000)})}
@@ -43,8 +64,9 @@ export async function handleExtraction(request,env,fetcher=fetch){
 export default {async fetch(request,env){
  const path=new URL(request.url).pathname;
  if(path==='/api/extract')return handleExtraction(request,env);
+ if(path==='/api/pdf-download')return handlePdfDownload(request);
  if(request.method!=='GET'&&request.method!=='HEAD')return new Response('Method not allowed',{status:405});
  const asset=FOLIO_ASSETS[path==='/'?'/index.html':path];
  if(!asset)return new Response('Not found',{status:404});
- return new Response(request.method==='HEAD'?null:asset.body,{headers:{'Content-Type':asset.type,'Cache-Control':'no-cache','X-Content-Type-Options':'nosniff','Referrer-Policy':'strict-origin-when-cross-origin'}});
+ return new Response(request.method==='HEAD'?null:asset.body,{headers:{'Content-Type':asset.type,'Cache-Control':'no-store','X-Content-Type-Options':'nosniff','Referrer-Policy':'strict-origin-when-cross-origin'}});
 }};

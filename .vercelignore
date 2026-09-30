@@ -1,0 +1,11 @@
+.env
+.env.*
+!.env.example
+.git
+.openai
+work
+node_modules
+public
+dist/server
+tests
+assets

@@ -1,0 +1,7 @@
+Built-in image generation. Fictional example portrait, used only in template gallery previews.
+
+Final prompt:
+Use case: photorealistic-natural. Asset type: fictional example profile portrait for a resume template gallery. Create one professional, approachable head-and-shoulders studio photograph of a fictional young adult with warm medium-brown skin, short softly textured dark hair, a clean cream crewneck shirt and forest-green overshirt. Front-facing, relaxed slight smile, realistic skin texture, natural soft daylight, solid pale warm-gray background. Square composition with the whole head and shoulders comfortably inside the frame and extra breathing room above the hair, suitable for a circular crop. Subject centered. Understated modern professional look. No text, no logo, no watermark. This is a fictional demo person, not the website user's photo.
+
+Website asset: assets/demo-profile-portrait.jpg
+Embedded browser asset: dist/demo-photo.js

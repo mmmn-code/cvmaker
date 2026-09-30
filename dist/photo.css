@@ -1,0 +1,35 @@
+/* Portrait styles share the resume's type scale, so they work in every preview. */
+.resume-profile-photo,.resume-photo-placeholder{width:8.4em;height:8.4em;flex:0 0 8.4em;display:block;object-fit:cover;border:.16em solid white;box-shadow:0 0 0 1px color-mix(in srgb,var(--resume-accent) 22%,white)}
+.photo-circle{border-radius:50%}.photo-square{border-radius:.12em}
+.resume-photo-placeholder{display:flex;align-items:center;justify-content:center;flex-direction:column;background:color-mix(in srgb,var(--resume-accent) 8%,white);color:var(--resume-accent);gap:.2em}
+.resume-photo-placeholder svg{width:3.1em;height:3.1em;fill:none;stroke:currentColor;stroke-width:1.7}
+.resume-photo-placeholder span{font-size:.8em;letter-spacing:.02em}
+.header-photo-left .resume-header,.header-photo-right .resume-header{display:flex;align-items:center;gap:2em}
+.header-photo-left .resume-identity,.header-photo-right .resume-identity{flex:1;min-width:0}
+.header-photo-right .resume-profile-photo,.header-photo-right .resume-photo-placeholder{order:2}
+.header-photo-centered .resume-header{text-align:center}
+.header-photo-centered .resume-profile-photo,.header-photo-centered .resume-photo-placeholder{margin:0 auto 1.5em;width:7.8em;height:7.8em}
+.template-portrait .resume-header{padding-bottom:1.3em;border-bottom:.3em solid var(--resume-accent)}
+.template-spotlight .resume-header{background:color-mix(in srgb,var(--resume-accent) 10%,white);padding:1.8em;border-bottom:.3em solid var(--resume-accent)}
+.template-spotlight .resume-header h1{color:var(--resume-accent);font-size:2.5em}
+.template-halo .resume-header h1{color:var(--resume-accent);font-size:3em}
+.template-hello .resume-header{padding-bottom:1.5em;border-bottom:1px solid var(--resume-accent)}
+.template-hello .resume-profile-photo,.template-hello .resume-photo-placeholder{box-shadow:.55em .55em 0 color-mix(in srgb,var(--resume-accent) 16%,white);margin-right:.5em}
+.photo-discovery{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px 15px;background:#f1f4eb;border-radius:10px;margin:0 0 24px;font-size:14px;line-height:1.5}
+.photo-discovery .text-button{font-size:14px;text-align:left}
+.photo-editor{padding:20px;background:#f6f8f2;border:1px solid #dce4d4;border-radius:14px;margin-bottom:26px}
+.photo-editor-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:20px}
+.photo-kicker{display:block;font-size:11px;letter-spacing:1px;font-weight:700;color:#6c7e61;margin-bottom:7px}
+.photo-editor h3{font-size:18px;margin:0}.photo-editor h3 span{font-weight:400;font-size:14px;color:var(--muted)}
+.photo-template-label{font-size:12px;border:1px solid #d3dfc4;border-radius:20px;background:#e7efdd;padding:6px 9px;white-space:nowrap}
+.photo-upload-row{display:flex;align-items:center;gap:20px}.photo-upload-preview{font-size:11px;--resume-accent:#345f54;flex-shrink:0}
+.photo-upload-copy{flex:1;min-width:0}.photo-file-label{display:block;font-size:14px;font-weight:650;margin-bottom:7px}
+.photo-upload-copy input{font:inherit;font-size:13px;max-width:100%;width:100%;color:var(--muted)}
+.photo-upload-copy input::file-selector-button{font:inherit;background:white;color:var(--ink);border:1px solid #c6d4bc;border-radius:7px;padding:9px 12px;margin-right:8px;cursor:pointer}
+.photo-upload-copy p{font-size:12px;color:var(--muted);margin:8px 0}.photo-upload-copy .text-button{font-size:13px;padding-left:0}
+.photo-framing{display:grid;grid-template-columns:1fr 1fr;gap:12px 20px;margin-top:16px}.photo-framing p{grid-column:1/-1;font-size:14px;font-weight:600;margin:0}
+.photo-framing label{display:flex;flex-direction:column;gap:8px;font-size:13px;color:var(--muted)}.photo-framing input{width:100%;accent-color:var(--forest,#294c40);min-height:25px;cursor:pointer}
+.photo-privacy{font-size:12px;line-height:1.5;color:var(--muted);margin:16px 0 0}#photo-status{font-size:13px;line-height:1.5;margin:12px 0 0;color:#335c40}#photo-status:empty{display:none}#photo-status.photo-error{color:#a34635}
+@media(max-width:650px){.photo-editor{padding:16px}.photo-editor-heading{align-items:flex-start;flex-wrap:wrap}.photo-upload-row{gap:14px}.photo-upload-preview{font-size:9px}.photo-discovery{align-items:flex-start;flex-direction:column;gap:3px}.photo-template-label{font-size:12px}.photo-upload-copy input{font-size:12px}.photo-editor h3{font-size:17px}}
+
+.photo-gallery-note{font-size:14px;color:var(--muted);margin:16px 0 0}.photo-gallery-note[hidden]{display:none}
