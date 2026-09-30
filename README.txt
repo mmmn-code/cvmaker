@@ -10,7 +10,9 @@ Features:
 - Template filtering: Minimal, Professional, Creative, Student, Tech, Academic.
 - Seven editable content sections, repeatable experience/education/project entries.
 - Live preview, template switching, five accent colors, local browser draft saving.
-- PDF export through the browser print dialog (A4 / US Letter), plain-text download.
+- PDF export through the browser print dialog (A4 / US Letter).
+- Share resume text via WhatsApp, email, system share menu, or copy to clipboard.
+- Share a selected exported PDF with device share targets on supported browsers.
 - Writing guidance and a linked review of 12 major resume builders.
 - Feature-detected WebMCP status and template selection tools.
 
@@ -19,6 +21,9 @@ Data and export:
 - Clear draft removes this browser's saved content. Export before moving devices.
 - PDF export uses the browser print engine. Select Save as PDF, disable headers and
   footers, and review page breaks. Preview is continuous; printed pages may differ.
+- Sharing opens a composer or device share menu; users choose recipients and send.
+- Long messages fall back to copying the full resume before opening the chosen app.
+- PDF files selected for sharing are not uploaded or saved by Folio.
 - The checklist checks content presence. It is not an ATS compatibility score.
 - No AI service or API key is required. Google Fonts is the only external asset.
 
