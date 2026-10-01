@@ -1,7 +1,7 @@
 FOLIO — RESUME STUDIO
 
-A responsive resume builder with 47 templates, guided editing, Gemini extraction,
-three- or four-template comparison, sharing, and free single-template PDF export.
+A responsive resume builder with 47 templates, guided editing, AI extraction,
+one- to four-template previews, sharing, and free single-template PDF export.
 
 Build and run locally (Node.js 24):
   node scripts/build.mjs
@@ -16,8 +16,8 @@ Validate:
 
 Features:
 - Templates: Minimal, Professional, Creative, Student, Tech, and Academic.
-- Paste resume details and explicitly select 3 or 4 templates.
-- Gemini extracts structured fields once; every preview uses the same extracted data.
+- Paste resume details and explicitly select 1 to 4 templates.
+- AI extracts structured fields once; every preview uses the same extracted data.
 - Review/edit the result, select one template, and export for INR 0 (free).
 - The free export summary does not collect card details or process a payment.
 - Seven editable sections with repeatable experience, education, and projects.
