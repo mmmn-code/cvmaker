@@ -41,3 +41,25 @@ services. No source designs, images, fonts, resume wording, or template files
 were imported. The new templates are original Folio implementations of common
 resume layout patterns, using Folio's existing licensed fonts and fictional
 sample portrait. The index CSV contains only catalog metadata for review.
+
+APP GALLERY FOLLOW-UP — OCTOBER 2, 2026
+Source: https://app.resumekraft.com/resumes
+The public app gallery displayed 28 named designs. All 28 thumbnail previews
+were visually reviewed in seven rows of four, without signing in or downloading
+template files. resumekraft-app-review.csv records each design's broad pattern
+and the closest existing or new Folio coverage. These are layout comparisons,
+not pixel-level matches; the source editor and underlying document exports
+were not inspected. Four designs were explicitly labeled free in the gallery:
+Simple, Topper, Mighty, and Center. A free label does not grant redistribution.
+
+Four original additions fill gaps from this review:
+- Pitch: highlighted profile panel and skills-first reading order.
+- Toolkit: optional square portrait and skill tags before work history.
+- Chronicle: dates in a separate column beside experience and education.
+- Marquee: optional round portrait in a solid banner, with projects first.
+
+Folio now has 67 templates, including 12 photo styles and nine layout filters.
+All additions work with existing career filters, AI previews, and PDF export.
+Skills use only user-entered wording; no proficiency ratings are invented.
+Source photos, code, template files, icons, text, and branding were not copied.
+The original 200-page audit and its historical counts remain unchanged.

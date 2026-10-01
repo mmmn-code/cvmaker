@@ -1009,9 +1009,14 @@ const templates=[...originalTemplates.map(t=>({...t,structure:"single",header:"p
     ],
     "keywords": "sales brand content communications marketing"
   }
-]];
+],
+ {id:'pitch',name:'The Pitch',description:'A highlighted introduction. Your strengths come first.',category:'Professional',layout:'collection',structure:'single',header:'plain',font:'sans',heading:'line',density:'standard',order:'skills',summary:'spotlight',color:'#74494f',bg:'#f1e4e5',badge:'FRESH STYLE',collection:'career',careers:['Business','Marketing','Human resources'],keywords:'summary spotlight skills first sales recruiter'},
+ {id:'toolkit',name:'The Toolkit',description:'A portrait and skill tags for hands-on talent.',category:'Tech',layout:'collection',structure:'single',header:'photo-right',photo:'square',font:'mono',heading:'plain',density:'standard',order:'skills',skills:'tags',color:'#315b64',bg:'#e0eceb',badge:'FRESH STYLE',collection:'career',careers:['Technology','Engineering','Creative'],keywords:'skills first tools developer designer tags'},
+ {id:'chronicle',name:'The Chronicle',description:'Dates in their own column. A story easy to follow.',category:'Professional',layout:'collection',structure:'dated',header:'ruled',font:'serif',heading:'line',density:'standard',order:'experience',color:'#5f5548',bg:'#ebe8df',badge:'FRESH STYLE',collection:'career',careers:['Finance','Legal','Research','Business'],keywords:'chronological dates experience accountant history'},
+ {id:'marquee',name:'The Marquee',description:'A bold portrait banner with a calm supporting column.',category:'Creative',layout:'collection',structure:'sidebar-right',header:'photo-left',photo:'circle',banner:'solid',font:'sans',heading:'plain',density:'standard',order:'projects',color:'#344966',bg:'#e3e9f1',badge:'FRESH STYLE',collection:'career',careers:['Creative','Marketing','Hospitality'],keywords:'photo banner portrait portfolio projects'}
+];
 const templateCategories=["Minimal","Professional","Creative","Student","Tech","Academic","Executive"];
-const layoutLabels={single:"Single column",sidebar:"Left sidebar","sidebar-right":"Right sidebar",split:"Two columns",rail:"Side headings","profile-left":"Profile left","profile-right":"Profile right",timeline:"Timeline"};
+const layoutLabels={single:"Single column",sidebar:"Left sidebar","sidebar-right":"Right sidebar",split:"Two columns",rail:"Side headings","profile-left":"Profile left","profile-right":"Profile right",timeline:"Timeline",dated:"Date column"};
 const careerCategories=["Business","Creative","Education","Engineering","Finance","Healthcare","Hospitality","Human resources","Legal","Marketing","Operations","Research","Technology"];
 const defaultCareers={Minimal:careerCategories,Professional:["Business","Finance","Healthcare","Hospitality","Human resources","Legal","Operations"],Creative:["Creative","Marketing"],Student:careerCategories,Tech:["Technology","Engineering"],Academic:["Education","Research","Healthcare"],Executive:["Business","Finance","Operations"]};
 for(const t of templates)t.careers??=defaultCareers[t.category];

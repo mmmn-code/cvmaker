@@ -1,0 +1,29 @@
+template,observed_pattern,folio_coverage,action
+Exceed,"Solid photo banner; left details column",Marquee and Portrait,Original banner pattern added
+Pioneer,"Small left portrait; right details column",Portrait and People,Existing broad coverage
+Urban,"Dark photo sidebar; main-column name",Anchor and Mosaic,Existing broad coverage
+Conquer,"Right portrait header; right details column",Spotlight and People,Existing broad coverage
+Force,"Left portrait; contact strip; skills before work",Toolkit and Dispatch,Original skills-first option added
+Spark,"Highlighted summary; right portrait/details column",Pitch and Welcome,Original summary emphasis added
+Progress,"Left portrait/details; plain main column",Mentor and Care,Existing broad coverage
+Grant,"Highlighted summary; skill tags; single column",Pitch and Toolkit,Original summary and skill-tag patterns added
+Honest,"Name/role across header; skill tags before work",Toolkit,Original skills-first option added
+Inspire,"Solid contact sidebar; name and portrait in main column",Anchor and Portrait,Existing broad coverage
+Timex,"Left portrait; contact strip; skills first",Toolkit and Dispatch,Original skills-first option added
+Cosmo,"Centered header; slim right details column",Halo and Margin,Existing broad coverage
+Vision,"Right-aligned header contacts; dates beside entries; right sidebar",Chronicle and Margin,Original date-column pattern added
+Bravo,"Solid photo banner; two columns",Marquee,Original banner pattern added
+Admire,"Right portrait; slim left contact column",Portrait and Atlas,Existing broad coverage
+Passion,"Right portrait header; right details column",Spotlight and Margin,Existing broad coverage
+Arrow,"Solid right-photo banner; right sidebar",Marquee,Original banner pattern added
+Target,"Framed centered name; right sidebar",Outline and Margin,Existing broad coverage
+Classic,"Centered plain header; dates in separate column",Chronicle and Classic,Original date-column pattern added
+Winner,"Left portrait; skill tags; date column",Toolkit and Chronicle,Original skills and date-column patterns added
+Gravity,"Photo header; rounded section labels; right sidebar",Portrait and Prism,Existing broad coverage
+Nova,"Colored name panel; contacts on right; side headings",Dispatch and Ledger,Existing broad coverage
+Express,"Monogram; compact summary in header; single column",Muse and Pitch,Existing broad coverage plus summary emphasis
+Simple,"Compact header; contact band; single column",Brief,Existing broad coverage
+Modro,"Rounded name panel; summary box; side headings",Pitch and Contour,Original summary emphasis added
+Topper,"Plain name; right contacts; side headings",Contour and Ledger,Existing broad coverage
+Mighty,"Centered header; plain single column",Classic,Existing broad coverage
+Center,"Centered framed name; balanced columns",Outline and Balance,Existing broad coverage
