@@ -1,6 +1,6 @@
 FOLIO — RESUME STUDIO
 
-A responsive resume builder with 47 templates, guided editing, AI extraction,
+A responsive resume builder with 63 templates, guided editing, AI extraction,
 one- to four-template previews, sharing, and free single-template PDF export.
 
 Build and run locally (Node.js 24):
@@ -81,3 +81,16 @@ Photo templates update:
 - assets/demo-profile-portrait.jpg is a fictional AI-generated example used only
   in gallery thumbnails. Its full generation prompt is included alongside it.
 - Verified on a 390 px phone viewport and in an actual downloaded photo PDF.
+
+Career collection update (October 2, 2026):
+- 16 original styles bring the collection to 63, including 10 photo styles.
+- Profile columns on either side, experience timelines, and contact bands share
+  structural metadata between HTML previews and PDF output.
+- Fresh styles and 13 career filters work with categories and text search in
+  the gallery and AI selector. AI still supports 1–4 selected templates.
+- The ResumeKraft audit cataloged all 200 public listing pages (2,394 entries).
+  This was an index audit plus representative visual review, not a download or
+  inspection of every sample's underlying template file. Research notes and
+  the page inventory record coverage and deduplication limits.
+- ResumeKraft assets, resume text, images, template files, and code are not
+  redistributed. All 16 added templates use Folio's original implementation.

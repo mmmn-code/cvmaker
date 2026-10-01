@@ -25,10 +25,14 @@ function resumePdfDefinition(data, templateId, accent, paperSize = 'A4', photo =
   const lines = text(value).split('\n').map(line => line.replace(/^\s*[•\-]\s*/, '').trim()).filter(Boolean);
   return lines.length ? {ul: lines.map(line => ({text: wrap(line), margin: [0, 1, 0, 1]})), margin: [11, 4, 0, 0]} : null;
  };
- const entry = (title, dates, body) => ({stack: [
+ const entry = (title, dates, body) => {
+ const item={stack: [
   {stack: [{text: wrap(title), bold: true}, ...(text(dates) ? [{text: wrap(dates), fontSize: 8, color: '#59665f', margin: [0, 2, 0, 0]}] : [])], unbreakable: true},
   ...body.filter(Boolean)
- ], margin: [0, 0, 0, 9], unbreakable: text(title).length + text(dates).length + JSON.stringify(body).length < 700});
+ ], margin: [0, 0, 0, 9], unbreakable: text(title).length + text(dates).length + JSON.stringify(body).length < 700};
+ if(t.structure!=='timeline')return item;
+ return {table:{widths:[9,'*'],body:[[{canvas:[{type:'ellipse',x:3,y:6,r1:2.5,r2:2.5,color}],border:[false,false,false,false]},item]]},layout:{hLineWidth:()=>0,vLineWidth:i=>i===1?.7:0,vLineColor:()=>tint(.4),paddingLeft:i=>i===1?10:0,paddingRight:()=>0,paddingTop:()=>0,paddingBottom:()=>0},margin:[0,0,0,6]};
+ };
  const content = {
   profile: text(data.summary) ? [paragraph(data.summary)] : [],
   experience: filled(data.experience).map(e => entry([e.title, e.company].filter(Boolean).join(' · '), e.dates, [bullets(e.details)])),
@@ -38,9 +42,9 @@ function resumePdfDefinition(data, templateId, accent, paperSize = 'A4', photo =
   extra: text(data.extra) ? [paragraph(data.extra)] : []
  };
  const titles = {profile: 'Profile', experience: 'Experience', education: 'Education', projects: 'Projects', skills: 'Skills', extra: text(data.extraTitle) || 'Additional information'};
- function section(key, sectionWidth = width, rail = t.structure === 'rail') {
+ function section(key, sectionWidth = width, rail = t.structure === 'rail', inSolidPanel = false) {
   if (!content[key].length) return [];
-  const label = {text: wrap(titles[key].toUpperCase()), font: headingFont, bold: true, fontSize: rail ? 8.5 : 9, characterSpacing: 0.8, color: t.layout === 'academic' ? '#273337' : color, margin: [0, 0, 0, 7]};
+  const label = {text: wrap(titles[key].toUpperCase()), font: headingFont, bold: true, fontSize: rail ? 8.5 : 9, characterSpacing: 0.8, color: inSolidPanel?'#ffffff':t.layout === 'academic' ? '#273337' : color, margin: [0, 0, 0, 7]};
   if (rail) return [{stack: [rule(sectionWidth), {columns: [{width: 83, stack: [label]}, {width: '*', stack: content[key]}], columnGap: 16, margin: [0, 12, 0, 0]}], margin: [0, gap, 0, 0]}];
   let heading;
   if (t.heading === 'blocks' || t.layout === 'tech') {
@@ -84,13 +88,28 @@ function resumePdfDefinition(data, templateId, accent, paperSize = 'A4', photo =
  }
  if (t.id === 'spotlight') header = {table: {widths: ['*'], body: [[{...header, fillColor: tint(.1)}]]}, layout: {hLineWidth: i => i === 1 ? 3 : 0, vLineWidth: () => 0, hLineColor: () => color, paddingTop: () => 18, paddingBottom: () => 18, paddingLeft: () => 18, paddingRight: () => 18}};
  else if (['portrait','hello'].includes(t.id)) header = {stack: [header, {...rule(width, color, t.id === 'portrait' ? 3 : .7), margin: [0, 15, 0, 0]}]};
+ if(t.header==='contact-band'){
+  const contact=identity[identity.length-1];
+  header={stack:[...identity.slice(0,-1).map((item,i)=>i===0?{...item,color}:item),{table:{widths:['*'],body:[[{...contact,color:'#ffffff',fillColor:color,margin:[10,7,10,7]}]]},layout:'noBorders',margin:[0,14,0,0]}]};
+ }
  const body = [];
+ if(['profile-left','profile-right'].includes(t.structure)){
+  const sideWidth=Math.round((width-24)*.32),mainWidth=width-24-sideWidth,solid=t.panel==='solid';
+  const sideIdentity=identity.map((item,i)=>({...item,color:solid?'#ffffff':i===0?color:'#273337',fontSize:i===0?19:i===identity.length-1?8:9,alignment:'left'}));
+  sideIdentity[sideIdentity.length-1]={stack:[data.email,data.phone,data.location,data.website].filter(Boolean).map(value=>({text:wrap(value),margin:[0,0,0,4]})),fontSize:8,color:solid?'#ffffff':'#273337',margin:[0,12,0,0]};
+  const portrait=t.photo&&validResumePhoto(photo)?[{image:photo,width:68,height:68,margin:[0,0,0,16]}]:[];
+  const side={stack:[...portrait,...sideIdentity,...['skills','extra'].flatMap(key=>section(key,sideWidth-24,false,solid))],fillColor:solid?color:tint(.09),color:solid?'#ffffff':'#273337',margin:[12,16,12,16]};
+  const order=t.order==='education'?['education','projects','experience']:t.order==='projects'?['projects','experience','education']:['experience','education','projects'];
+  const main={stack:['profile',...order].flatMap(key=>section(key,mainWidth,false))};
+  const left=t.structure==='profile-left';
+  body.push({table:{widths:left?[sideWidth,24,mainWidth]:[mainWidth,24,sideWidth],body:[left?[side,{text:''},main]:[main,{text:''},side]]},layout:{hLineWidth:()=>0,vLineWidth:()=>0,paddingLeft:()=>0,paddingRight:()=>0,paddingTop:()=>0,paddingBottom:()=>0}});
+ }else{
  if (t.layout === 'bold') body.push({...rule(width, color, 9), margin: [0, 0, 0, 18]});
  body.push({...header, unbreakable: true});
  if (t.layout === 'student' && text(data.role)) body.push({...rule(width, color, 3), margin: [0, 13, 0, 0]});
  body.push(...section('profile'));
  if (['sidebar', 'sidebar-right', 'split'].includes(t.structure)) {
-  const primary = t.order === 'education' ? ['education', 'projects', 'experience'] : ['experience', 'projects'];
+  const primary = t.order === 'education' ? ['education', 'projects', 'experience'] : t.order==='projects'?['projects','experience']:['experience', 'projects'];
   const secondary = t.order === 'education' ? ['skills', 'extra'] : ['education', 'skills', 'extra'];
   if (secondary.some(key => content[key].length)) {
    const sideWidth = Math.round((width - 22) * (t.structure === 'split' ? .44 : .34));
@@ -103,6 +122,7 @@ function resumePdfDefinition(data, templateId, accent, paperSize = 'A4', photo =
  } else {
   const order = t.order === 'education' ? ['education', 'projects', 'experience'] : t.order === 'projects' ? ['projects', 'experience', 'education'] : ['experience', 'education', 'projects'];
   body.push(...[...order, 'skills', 'extra'].flatMap(key => section(key)));
+ }
  }
  return {
   pageSize: paperSize === 'Letter' ? 'LETTER' : 'A4', pageMargins: [margin, margin, margin, margin],

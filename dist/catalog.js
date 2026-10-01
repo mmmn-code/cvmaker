@@ -639,8 +639,383 @@ const templates=[...originalTemplates.map(t=>({...t,structure:"single",header:"p
     "layout": "collection",
     "badge": "WITH PHOTO",
     "density": "standard"
+  },
+  {
+    "id": "anchor",
+    "name": "The Anchor",
+    "description": "A navy profile column with a clear career story.",
+    "category": "Professional",
+    "structure": "profile-left",
+    "header": "photo-centered",
+    "font": "sans",
+    "heading": "line",
+    "color": "#29465b",
+    "bg": "#e0eaf0",
+    "order": "experience",
+    "layout": "collection",
+    "badge": "FRESH STYLE",
+    "density": "standard",
+    "collection": "career",
+    "careers": [
+      "Business",
+      "Operations",
+      "Finance"
+    ],
+    "keywords": "manager leadership strategy",
+    "photo": "circle",
+    "panel": "solid"
+  },
+  {
+    "id": "flourish",
+    "name": "The Flourish",
+    "description": "A plum portrait rail. Your projects take the lead.",
+    "category": "Creative",
+    "structure": "profile-left",
+    "header": "photo-centered",
+    "font": "serif",
+    "heading": "plain",
+    "color": "#574260",
+    "bg": "#eee5ef",
+    "order": "projects",
+    "layout": "collection",
+    "badge": "FRESH STYLE",
+    "density": "standard",
+    "collection": "career",
+    "careers": [
+      "Creative",
+      "Marketing"
+    ],
+    "keywords": "designer artist writer portfolio",
+    "photo": "square",
+    "panel": "solid"
+  },
+  {
+    "id": "care",
+    "name": "The Care",
+    "description": "A calm green profile rail for people-focused work.",
+    "category": "Professional",
+    "structure": "profile-left",
+    "header": "plain",
+    "font": "sans",
+    "heading": "line",
+    "color": "#28574f",
+    "bg": "#e0eeea",
+    "order": "experience",
+    "layout": "collection",
+    "badge": "FRESH STYLE",
+    "density": "standard",
+    "collection": "career",
+    "careers": [
+      "Healthcare",
+      "Education"
+    ],
+    "keywords": "nurse physician medical therapist care",
+    "panel": "solid"
+  },
+  {
+    "id": "mentor",
+    "name": "The Mentor",
+    "description": "Education first, with a thoughtful portrait column.",
+    "category": "Academic",
+    "structure": "profile-left",
+    "header": "photo-centered",
+    "font": "serif",
+    "heading": "line",
+    "color": "#465740",
+    "bg": "#e8ecdf",
+    "order": "education",
+    "layout": "collection",
+    "badge": "FRESH STYLE",
+    "density": "standard",
+    "collection": "career",
+    "careers": [
+      "Education",
+      "Research"
+    ],
+    "keywords": "teacher professor lecturer counselor research",
+    "photo": "circle",
+    "panel": "soft"
+  },
+  {
+    "id": "mosaic",
+    "name": "The Mosaic",
+    "description": "Projects up front, with a soft portrait column.",
+    "category": "Creative",
+    "structure": "profile-right",
+    "header": "photo-centered",
+    "font": "sans",
+    "heading": "blocks",
+    "color": "#705478",
+    "bg": "#eee5f1",
+    "order": "projects",
+    "layout": "collection",
+    "badge": "FRESH STYLE",
+    "density": "standard",
+    "collection": "career",
+    "careers": [
+      "Creative",
+      "Technology"
+    ],
+    "keywords": "designer ux ui architecture portfolio",
+    "photo": "square",
+    "panel": "soft"
+  },
+  {
+    "id": "envoy",
+    "name": "The Envoy",
+    "description": "A quiet profile rail for a well-established career.",
+    "category": "Executive",
+    "structure": "profile-right",
+    "header": "plain",
+    "font": "serif",
+    "heading": "line",
+    "color": "#3f4d63",
+    "bg": "#e6eaf0",
+    "order": "experience",
+    "layout": "collection",
+    "badge": "FRESH STYLE",
+    "density": "standard",
+    "collection": "career",
+    "careers": [
+      "Business",
+      "Legal",
+      "Finance"
+    ],
+    "keywords": "director executive consultant attorney lawyer",
+    "panel": "soft"
+  },
+  {
+    "id": "welcome",
+    "name": "The Welcome",
+    "description": "A warm portrait and room for service experience.",
+    "category": "Professional",
+    "structure": "profile-right",
+    "header": "photo-centered",
+    "font": "sans",
+    "heading": "plain",
+    "color": "#895b37",
+    "bg": "#f1e7dc",
+    "order": "experience",
+    "layout": "collection",
+    "badge": "FRESH STYLE",
+    "density": "standard",
+    "collection": "career",
+    "careers": [
+      "Hospitality",
+      "Operations"
+    ],
+    "keywords": "chef hotel restaurant tourism customer service",
+    "photo": "circle",
+    "panel": "soft"
+  },
+  {
+    "id": "people",
+    "name": "The People",
+    "description": "An approachable portrait with neatly grouped details.",
+    "category": "Professional",
+    "structure": "profile-right",
+    "header": "photo-centered",
+    "font": "sans",
+    "heading": "blocks",
+    "color": "#3e6174",
+    "bg": "#e3edf1",
+    "order": "experience",
+    "layout": "collection",
+    "badge": "FRESH STYLE",
+    "density": "standard",
+    "collection": "career",
+    "careers": [
+      "Human resources",
+      "Business"
+    ],
+    "keywords": "hr recruiter talent people operations",
+    "photo": "circle",
+    "panel": "soft"
+  },
+  {
+    "id": "milestone",
+    "name": "The Milestone",
+    "description": "A simple timeline for every step forward.",
+    "category": "Professional",
+    "structure": "timeline",
+    "header": "plain",
+    "font": "sans",
+    "heading": "line",
+    "color": "#3b5877",
+    "bg": "#e4ebf3",
+    "order": "experience",
+    "layout": "collection",
+    "badge": "FRESH STYLE",
+    "density": "standard",
+    "collection": "career",
+    "careers": [
+      "Operations",
+      "Business"
+    ],
+    "keywords": "project manager supply chain logistics"
+  },
+  {
+    "id": "catalyst",
+    "name": "The Catalyst",
+    "description": "A precise timeline with a technical point of view.",
+    "category": "Tech",
+    "structure": "timeline",
+    "header": "stripe",
+    "font": "mono",
+    "heading": "plain",
+    "color": "#326357",
+    "bg": "#e1eee7",
+    "order": "experience",
+    "layout": "collection",
+    "badge": "FRESH STYLE",
+    "density": "standard",
+    "collection": "career",
+    "careers": [
+      "Technology",
+      "Engineering"
+    ],
+    "keywords": "developer software devops cloud engineer data"
+  },
+  {
+    "id": "apprentice",
+    "name": "The Apprentice",
+    "description": "A fresh timeline that puts learning first.",
+    "category": "Student",
+    "structure": "timeline",
+    "header": "centered",
+    "font": "sans",
+    "heading": "blocks",
+    "color": "#a55543",
+    "bg": "#f6e5de",
+    "order": "education",
+    "layout": "collection",
+    "badge": "FRESH STYLE",
+    "density": "standard",
+    "collection": "career",
+    "careers": [
+      "Education",
+      "Engineering"
+    ],
+    "keywords": "graduate student internship fresher trainee"
+  },
+  {
+    "id": "discovery",
+    "name": "The Discovery",
+    "description": "A research timeline with classic serif detail.",
+    "category": "Academic",
+    "structure": "timeline",
+    "header": "ruled",
+    "font": "serif",
+    "heading": "line",
+    "color": "#465578",
+    "bg": "#e8eaf4",
+    "order": "education",
+    "layout": "collection",
+    "badge": "FRESH STYLE",
+    "density": "standard",
+    "collection": "career",
+    "careers": [
+      "Research",
+      "Education",
+      "Healthcare"
+    ],
+    "keywords": "scientist academic laboratory biology publications"
+  },
+  {
+    "id": "dispatch",
+    "name": "The Dispatch",
+    "description": "A contact band and crisp side headings.",
+    "category": "Professional",
+    "structure": "rail",
+    "header": "contact-band",
+    "font": "sans",
+    "heading": "plain",
+    "color": "#286268",
+    "bg": "#e0edef",
+    "order": "experience",
+    "layout": "collection",
+    "badge": "FRESH STYLE",
+    "density": "standard",
+    "collection": "career",
+    "careers": [
+      "Operations",
+      "Engineering"
+    ],
+    "keywords": "administration logistics procurement supply chain"
+  },
+  {
+    "id": "brief",
+    "name": "The Brief",
+    "description": "A restrained serif layout with a tidy contact band.",
+    "category": "Professional",
+    "structure": "single",
+    "header": "contact-band",
+    "font": "serif",
+    "heading": "line",
+    "color": "#66543f",
+    "bg": "#efe9df",
+    "order": "experience",
+    "layout": "collection",
+    "badge": "FRESH STYLE",
+    "density": "standard",
+    "collection": "career",
+    "careers": [
+      "Legal",
+      "Finance"
+    ],
+    "keywords": "attorney lawyer compliance accountant analyst banker"
+  },
+  {
+    "id": "junction",
+    "name": "The Junction",
+    "description": "A clear contact band with space for your tech stack.",
+    "category": "Tech",
+    "structure": "split",
+    "header": "contact-band",
+    "font": "mono",
+    "heading": "line",
+    "color": "#475f79",
+    "bg": "#e5ecf3",
+    "order": "experience",
+    "layout": "collection",
+    "badge": "FRESH STYLE",
+    "density": "standard",
+    "collection": "career",
+    "careers": [
+      "Technology",
+      "Engineering"
+    ],
+    "keywords": "engineer developer network security database"
+  },
+  {
+    "id": "broadcast",
+    "name": "The Broadcast",
+    "description": "A bold contact band. Your best projects first.",
+    "category": "Creative",
+    "structure": "split",
+    "header": "contact-band",
+    "font": "sans",
+    "heading": "blocks",
+    "color": "#81534f",
+    "bg": "#f2e5e0",
+    "order": "projects",
+    "layout": "collection",
+    "badge": "FRESH STYLE",
+    "density": "standard",
+    "collection": "career",
+    "careers": [
+      "Marketing",
+      "Creative"
+    ],
+    "keywords": "sales brand content communications marketing"
   }
 ]];
 const templateCategories=["Minimal","Professional","Creative","Student","Tech","Academic","Executive"];
-const layoutLabels={single:"Single column",sidebar:"Left sidebar","sidebar-right":"Right sidebar",split:"Two columns",rail:"Side headings"};
-function matchingTemplates(category="All templates",query="",layout="all"){const words=query.trim().toLowerCase().split(/\s+/).filter(Boolean);return templates.filter(t=>(category==="All templates"||(category==="With photo"?Boolean(t.photo):t.category===category))&&(layout==="all"||t.structure===layout)&&words.every(word=>[t.name,t.category,t.description,layoutLabels[t.structure],t.photo?"photo portrait":""].join(" ").toLowerCase().includes(word)))}
+const layoutLabels={single:"Single column",sidebar:"Left sidebar","sidebar-right":"Right sidebar",split:"Two columns",rail:"Side headings","profile-left":"Profile left","profile-right":"Profile right",timeline:"Timeline"};
+const careerCategories=["Business","Creative","Education","Engineering","Finance","Healthcare","Hospitality","Human resources","Legal","Marketing","Operations","Research","Technology"];
+const defaultCareers={Minimal:careerCategories,Professional:["Business","Finance","Healthcare","Hospitality","Human resources","Legal","Operations"],Creative:["Creative","Marketing"],Student:careerCategories,Tech:["Technology","Engineering"],Academic:["Education","Research","Healthcare"],Executive:["Business","Finance","Operations"]};
+for(const t of templates)t.careers??=defaultCareers[t.category];
+function matchingTemplates(category="All templates",query="",layout="all",career="All careers"){
+ const words=query.trim().toLowerCase().split(/\s+/).filter(Boolean);
+ return templates.filter(t=>(category==="All templates"||(category==="Fresh styles"?t.collection==="career":category==="With photo"?Boolean(t.photo):t.category===category))&&(layout==="all"||t.structure===layout)&&(career==="All careers"||t.careers.includes(career))&&words.every(word=>[t.name,t.category,t.description,layoutLabels[t.structure],t.photo?"photo portrait":"",t.keywords||"",...t.careers].join(" ").toLowerCase().includes(word)))
+}

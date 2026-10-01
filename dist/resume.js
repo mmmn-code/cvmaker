@@ -12,8 +12,12 @@ function resumeMarkup(d,templateId=state.template,color=state.color,photo="",pho
  const initials=(d.name||'Your name').trim().split(/\s+/).slice(0,2).map(v=>v[0]).join('');
  const header=`<header class="resume-header">${t.photo?resumePhotoMarkup(photo,t.photo,photoPosition):''}${t.header==='monogram'?`<div class="resume-monogram" aria-hidden="true">${esc(initials)}</div>`:''}<div class="resume-identity"><h1>${esc(d.name||'Your name')}</h1>${d.role?`<p class="resume-role">${esc(d.role)}</p>`:''}<div class="resume-contact">${[d.email,d.phone,d.location,d.website].filter(Boolean).map(s=>`<span>${esc(s)}</span>`).join('<span aria-hidden="true"> · </span>')}</div></div></header>`;
  let body;
+ if(['profile-left','profile-right'].includes(t.structure)){
+  const main=t.order==='education'?education+projects+exp:t.order==='projects'?projects+exp+education:exp+education+projects;
+  return `<article class="resume-paper resume-${t.layout} structure-${t.structure} header-${t.header} font-${t.font} heading-${t.heading} density-${t.density} panel-${t.panel} template-${t.id}" style="--resume-accent:${color}"><div class="resume-profile-layout"><div class="resume-profile-rail">${header}${skills}${extra}</div><div class="resume-profile-main">${profile}${main}</div></div></article>`;
+ }
  if(['sidebar','sidebar-right','split'].includes(t.structure)){
-  const primary=t.order==='education'?education+projects+exp:exp+projects;
+  const primary=t.order==='education'?education+projects+exp:t.order==='projects'?projects+exp:exp+projects;
   const secondary=(t.order==='education'?'':education)+skills+extra;
   body=`${profile}<div class="resume-columns ${secondary?'':'no-secondary'}"><div class="resume-main">${primary}</div>${secondary?`<aside class="resume-aside">${secondary}</aside>`:''}</div>`;
  }else body=profile+(t.order==='education'?education+projects+exp:t.order==='projects'?projects+exp+education:exp+education+projects)+skills+extra;

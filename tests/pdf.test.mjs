@@ -10,7 +10,7 @@ vm.runInContext(read('catalog.js') + '\n' + read('photo.js') + '\n' + read('pdf.
 const {templates,resumePdfDefinition,resumePdfFilename,createResumePdfBlob,folioPdfFonts} = context.api;
 const data = {name: 'Taylor Example', role: 'Research Engineer', email: 'hello@example.com', phone: '', location: 'Example City', website: 'example.com', summary: 'PROFILE_SENTINEL', experience: [{title: 'ROLE_SENTINEL', company: 'COMPANY_SENTINEL', dates: '2022–2026', details: 'WORK_SENTINEL\nSECOND_BULLET'}], education: [{degree: 'DEGREE_SENTINEL', school: 'SCHOOL_SENTINEL', dates: '2018–2022', details: 'EDUCATION_SENTINEL'}], skills: 'SKILL_SENTINEL, JavaScript', projects: [{title: 'PROJECT_SENTINEL', link: 'example.com/project', details: 'PROJECT_DETAIL'}], extraTitle: 'Languages', extra: 'English, Hindi'};
 
-test('all 47 PDF templates retain every section and entry exactly once', () => {
+test('all 63 PDF templates retain every section and entry exactly once', () => {
  for (const template of templates) {
   const doc = resumePdfDefinition(data, template.id, '#123456');
   const content = JSON.stringify(doc.content);
@@ -40,8 +40,8 @@ const engine = commonJs(read('vendor/pdfmake.min.js'));
 const vfs = commonJs(read('vendor/folio-fonts.js'));
 engine.addVirtualFileSystem(vfs);
 
-test('the bundled engine generates actual PDF files for all five layouts and both sizes', async () => {
- for (const id of ['momentum','atlas','orbit','prism','contour','scholar','byte']) {
+test('the bundled engine generates actual PDF files for all eight layouts, contact bands, and both sizes', async () => {
+ for (const id of ['momentum','atlas','orbit','prism','contour','scholar','byte','anchor','mosaic','milestone','brief','broadcast']) {
   for (const size of ['A4','Letter']) {
    const blob = await createResumePdfBlob(engine,resumePdfDefinition(data,id,'#365cc5',size));
    const bytes = Buffer.from(await blob.arrayBuffer());
